@@ -19,6 +19,7 @@ namespace api.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
+            //per ogni elemento della lista chiama il metodo stock su di esso
             var stocks = _context.Stocks.ToList().Select(s => s.ToStockDto());
 
             return Ok(stocks);
