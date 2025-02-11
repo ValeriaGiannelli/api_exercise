@@ -5,6 +5,11 @@ namespace api.Mappers
 {
     public static class StockMappers //è un extension method
     {
+        /// <summary>
+        /// Metodo per modificare da Stock a DTO
+        /// </summary>
+        /// <param name="stockModel"></param>
+        /// <returns></returns>
         public static StockDto ToStockDto(this Stock stockModel)
         {
             return new StockDto
@@ -19,6 +24,12 @@ namespace api.Mappers
             };
         }
 
+
+        /// <summary>
+        /// Merodo per modificare un DTo creato in uno Stock
+        /// </summary>
+        /// <param name="stockDto"></param>
+        /// <returns></returns>
         public static Stock ToStockFromCreateDTO(this CreateStockRequestDto stockDto)
         {
             //deve essere sotto forma di Stock, non può essere un dto
