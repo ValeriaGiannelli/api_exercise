@@ -1,6 +1,7 @@
 ﻿using System;
 using api.Data;
 using api.Dtos.Stock;
+using api.Interfaces;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,8 +15,10 @@ namespace api.Controllers
     {
         //definisco la variabile _context
         private readonly ApplicationDBContext _context;
-        public StockController(ApplicationDBContext context)
+        private readonly IStockRepository _stockRepo;
+        public StockController(ApplicationDBContext context, IStockRepository stockRepo)
         {
+            _stockRepo = stockRepo;
             _context = context;
         }
 
@@ -27,7 +30,7 @@ namespace api.Controllers
         public async Task<IActionResult> GetAll()
         {
             //per ogni elemento della lista chiama il metodo stock su di esso
-            var stocks = await _context.Stocks.ToListAsync();
+            var stocks = await _stockRepo.GetAllAsync();
             var stockDto = stocks.Select(s => s.ToStockDto());
 
             return Ok(stocks);

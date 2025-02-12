@@ -1,4 +1,6 @@
 using api.Data; //cartella di riferimento per ApplicationDBContext
+using api.Interfaces;
+using api.Repository;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -15,6 +17,9 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+// Registra la repository dicendo che ogni volta che serve un IStockRepository, deve usare StockRepository
+builder.Services.AddScoped<IStockRepository, StockRepository>();
 
 var app = builder.Build();
 
