@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using api.Dtos.Comment;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace api.Dtos.Stock
 {
@@ -12,5 +13,8 @@ namespace api.Dtos.Stock
         public decimal LastDiv { get; set; } //porzione di utile della società
         public string Industry { get; set; } = string.Empty; //nome dell'industria
         public long MarketCap { get; set; } //valore totale azioni
+
+        //linkare i commenti
+        public List<CommentDto> Comments { get; set; }
     }
 }

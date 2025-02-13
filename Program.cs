@@ -2,6 +2,7 @@ using api.Data; //cartella di riferimento per ApplicationDBContext
 using api.Interfaces;
 using api.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(); // aggiungi comando per il controller
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//per evitare object cycles
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
 
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
